@@ -32,7 +32,26 @@ upper_tri
 
 melted_FA_cormat <- melt(upper_tri, na.rm = TRUE)
 
+###now would split the years and redo both years' plots and combine them.. SLOW!
 
+
+
+## Making a pipable correlation
+
+Meat %>%
+  mutate_at(vars(-Year), log10) %>%
+  group_by(Year) %>%
+  do(cor = cor(.[,1:4])) %>%
+  broom::tidy(cor) %>%
+  gather(.colnames, cor, -Year, -.rownames) %>%
+  ggplot(aes(.rownames, .colnames, fill = cor)) +
+  geom_tile(size = 0.1, colour = "black") +
+  scale_fill_gradient(low = "purple", high = "blue", name = "Correlation") +
+  facet_wrap(~Year) +
+  labs(x = "Fatty Acid", y = "Fatty Acid") +
+  theme(axis.title.y = element_text(size = rel(1.6), angle = 90)) +
+  theme(axis.title.x = element_text(size = rel(1.6), angle = 00)) +
+  theme(strip.text = element_text(size=20))  
 
 #Tidying Data
 Meat_tidy <- Meat %>% 
