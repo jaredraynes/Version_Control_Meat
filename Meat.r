@@ -10,4 +10,9 @@ Meat <- read_csv("Data/bcfa_C17_fa.csv") %>%
     mutate(ID = row_number(Year)) %>% 
   
 #Gather Fatty acids into a single column
-    gather("Fatty Acid", val= Concentration, MOA, MNA, EOA, C17.0)
+    gather(Fatty_Acid, val= Concentration, MOA, MNA, EOA, C17.0) %>%
+
+#Make Year into character
+    mutate(Year = as.character(Year))
+
+
