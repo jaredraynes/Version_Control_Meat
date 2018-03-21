@@ -41,5 +41,33 @@ ggplot(filter(Meat_tidy, Fatty_Acid == "MOA"), aes(Fatty_Acid, y = Concentration
 
 #Plotting the untidy data because I want to plot the Fatty acids against each other
 
+ggplot(Meat, aes(x = MOA, y = MNA, colour = Year)) +
+  geom_point(size = 3, alpha = 0.2) +
+  scale_y_log10() 
 
+ggplot(Meat, aes(x = MOA, y = EOA, colour = Year)) +
+  geom_point(size = 3, alpha = 0.2) +
+  scale_y_log10()
+
+ggplot(Meat, aes(x = MOA, y = C17.0, colour = Year)) +
+  geom_point(size = 3, alpha = 0.2) +
+  scale_y_log10()
+
+#Correlation plots from original untidy data
+
+#Correlation plot 1
+ggplot(melted_FA_cormat, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile()
+
+
+#Correlation plot 2
+ggplot(data = melted_FA_cormat, aes(Var2, Var1, fill = value))+
+  geom_tile(color = "white")+
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+                       midpoint = 0, limit = c(-1,1), space = "Lab", 
+                       name="Pearson\nCorrelation") +
+  theme_minimal()+ 
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, 
+                                   size = 12, hjust = 1))+
+  coord_fixed()
 
