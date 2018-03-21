@@ -53,6 +53,10 @@ ggplot(Meat, aes(x = MOA, y = C17.0, colour = Year)) +
   geom_point(size = 3, alpha = 0.2) +
   scale_y_log10()
 
+ggplot(Meat, aes(x = MNA, y = C17.0, colour = Year)) +
+  geom_point(size = 3, alpha = 0.2) +
+  scale_y_log10()
+
 #Correlation plots from original untidy data
 
 #Correlation plot 1
@@ -61,6 +65,9 @@ ggplot(melted_FA_cormat, aes(x = Var1, y = Var2, fill = value)) +
 
 
 #Correlation plot 2
+##this contains both years' data so I would actually like to separating it
+#by faceting. Cannot do this because have lost the years when made the
+#correlation plot.
 ggplot(data = melted_FA_cormat, aes(Var2, Var1, fill = value))+
   geom_tile(color = "white")+
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
@@ -70,4 +77,6 @@ ggplot(data = melted_FA_cormat, aes(Var2, Var1, fill = value))+
   theme(axis.text.x = element_text(angle = 45, vjust = 1, 
                                    size = 12, hjust = 1))+
   coord_fixed()
+
+
 
